@@ -324,10 +324,9 @@ export default function() {
           path.replaceWith(
             t.callExpression(path.node.callee, [path.node.arguments[1]])
           )
-          // there is a problem with skip https://github.com/babel/babel/issues/4098
-          // skipPath is workaround
+          // skipPath is workaround to skip new path in this plugin
+          // path.skip() can't be used because it will be skipped all plugins
           skipPath.add(path)
-          path.skip()
         }
 
         const properties = getProperties(path.get('arguments.0'))
